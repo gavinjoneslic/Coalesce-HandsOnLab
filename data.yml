@@ -8,6 +8,14 @@ jobs:
     steps: []
     subgraphs: []
 locations:
+  RAW:
+    mappingDefinitions:
+      "2":
+        database: PC_COALESCE_TEST
+        schema: RAW
+      "3":
+        database: PC_COALESCE_PROD
+        schema: RAW
   SAMPLE:
     mappingDefinitions:
       "2":
@@ -19,15 +27,59 @@ locations:
   WORK:
     mappingDefinitions:
       "2":
-        database: PC_COALESCE_DB
-        schema: TEST
+        database: PC_COALESCE_TEST
+        schema: PUBLIC
       "3":
-        database: PC_COALESCE_DB
-        schema: PROD
+        database: PC_COALESCE_PROD
+        schema: PUBLIC
 macros: {}
 packages: {}
 projects: {}
 stepTypes:
+  StepType-1:
+    id: "1"
+    isDisabled: false
+    metadata:
+      defaultStorageLocation: null
+      error: null
+      nodeMetadataSpec: |-
+        capitalized: Raw Dump Node
+        short: RAW
+        tagColor: gray
+        plural: Raw Dump Nodes
+
+        systemColumns:
+          - displayName: DATA
+            transform: "'Active'"
+            dataType: OBJECT
+            placement: end
+            attributeName: isData
+
+          - displayName: FILENAME
+            transform: ''
+            dataType: VARCHAR(2048)
+            placement: end
+            attributeName: isSource
+
+          - displayName: LOAD_DATE
+            transform: ''
+            dataType: TIMESTAMP_NTZ(9)
+            placement: end
+            attributeName: isSource
+      templates:
+        create:
+          templateString: |-
+            {{ stage('Create Stage Table') }}
+            CREATE TABLE IF NOT EXISTS {{ ref_no_link(node.location.name, node.name) }} (
+              DATA OBJECT,
+              FILENAME VARCHAR(2048),
+              LOAD_DATE TIMESTAMP_NTZ(9)
+            )
+            COMMENT = 'Import from file node';
+        run:
+          templateString: ""
+    name: Raw Dump
+    version: 1
   StepType-Dimension:
     id: Dimension
     isDisabled: false

@@ -1,0 +1,83 @@
+steps:
+  RAW_TEST-9d4f920f-f09b-4619-9846-face78a4e56b:
+    operation:
+      config: {}
+      database: ""
+      deployEnabled: true
+      description: ""
+      isMultisource: false
+      locationName: RAW
+      materializationType: table
+      metadata:
+        appliedNodeTests: []
+        columns:
+          - acceptedValues:
+              strictMatch: true
+              values: []
+            appliedColumnTests: {}
+            columnReference:
+              columnCounter: b5eb2abd-d720-41ec-b353-1c0a0937c1eb
+              stepCounter: 9d4f920f-f09b-4619-9846-face78a4e56b
+            config: {}
+            dataType: OBJECT
+            defaultValue: ""
+            description: ""
+            hashColumns: []
+            isData: true
+            name: DATA
+            nullable: true
+            sourceColumnReferences:
+              - columnReferences: []
+                transform: "'Active'"
+          - acceptedValues:
+              strictMatch: true
+              values: []
+            appliedColumnTests: {}
+            columnReference:
+              columnCounter: 31a00392-ee22-4fca-8e66-1598776a5944
+              stepCounter: 9d4f920f-f09b-4619-9846-face78a4e56b
+            config: {}
+            dataType: VARCHAR(2048)
+            defaultValue: ""
+            description: ""
+            hashColumns: []
+            isSource: true
+            name: FILENAME
+            nullable: true
+            sourceColumnReferences:
+              - columnReferences: []
+                transform: ""
+          - acceptedValues:
+              strictMatch: true
+              values: []
+            appliedColumnTests: {}
+            columnReference:
+              columnCounter: 557d2fc6-020d-4d62-8c97-d22c20e20ed0
+              stepCounter: 9d4f920f-f09b-4619-9846-face78a4e56b
+            config: {}
+            dataType: TIMESTAMP_NTZ(9)
+            defaultValue: ""
+            description: ""
+            hashColumns: []
+            isSource: true
+            name: LOAD_DATE
+            nullable: true
+            sourceColumnReferences:
+              - columnReferences: []
+                transform: ""
+        cteString: ""
+        enabledColumnTestIDs: []
+        sourceMapping:
+          - customSQL:
+              customSQL: ""
+            dependencies: []
+            join:
+              joinCondition: ""
+            name: RAW_TEST
+            noLinkRefs: []
+      name: RAW_TEST
+      overrideSQL: false
+      schema: ""
+      sqlType: "1"
+      type: sql
+    stepCounter: 9d4f920f-f09b-4619-9846-face78a4e56b
