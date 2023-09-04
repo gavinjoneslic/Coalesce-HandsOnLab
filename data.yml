@@ -16,12 +16,18 @@ locations:
       "3":
         database: PC_COALESCE_PROD
         schema: RAW
+      "5":
+        database: PC_COALESCE_TEST
+        schema: RAW
   SAMPLE:
     mappingDefinitions:
       "2":
         database: SNOWFLAKE_SAMPLE_DATA
         schema: TPCH_SF1
       "3":
+        database: SNOWFLAKE_SAMPLE_DATA
+        schema: TPCH_SF1
+      "5":
         database: SNOWFLAKE_SAMPLE_DATA
         schema: TPCH_SF1
   WORK:
@@ -31,6 +37,9 @@ locations:
         schema: PUBLIC
       "3":
         database: PC_COALESCE_PROD
+        schema: PUBLIC
+      "5":
+        database: PC_COALESCE_TEST
         schema: PUBLIC
 macros: {}
 packages: {}
