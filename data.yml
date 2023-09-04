@@ -8,13 +8,18 @@ jobs:
     steps: []
     subgraphs: []
 locations:
+  PUBLISHED:
+    mappingDefinitions:
+      "5":
+        database: PC_COALESCE_TEST
+        schema: PUBLISH
+      "6":
+        database: PC_COALESCE_PROD
+        schema: PUBLISH
   RAW:
     mappingDefinitions:
       "2":
         database: PC_COALESCE_TEST
-        schema: RAW
-      "3":
-        database: PC_COALESCE_PROD
         schema: RAW
       "5":
         database: PC_COALESCE_TEST
@@ -25,9 +30,6 @@ locations:
   SAMPLE:
     mappingDefinitions:
       "2":
-        database: SNOWFLAKE_SAMPLE_DATA
-        schema: TPCH_SF1
-      "3":
         database: SNOWFLAKE_SAMPLE_DATA
         schema: TPCH_SF1
       "5":
@@ -41,15 +43,12 @@ locations:
       "2":
         database: PC_COALESCE_TEST
         schema: PUBLIC
-      "3":
-        database: PC_COALESCE_PROD
-        schema: PUBLIC
       "5":
         database: PC_COALESCE_TEST
-        schema: PUBLIC
+        schema: TRANSFORM
       "6":
         database: PC_COALESCE_PROD
-        schema: PUBLIC
+        schema: TRANSFORM
 macros: {}
 packages: {}
 projects: {}
@@ -58,7 +57,7 @@ stepTypes:
     id: "1"
     isDisabled: false
     metadata:
-      defaultStorageLocation: null
+      defaultStorageLocation: RAW
       error: null
       nodeMetadataSpec: |-
         capitalized: Raw Dump Node
@@ -97,6 +96,29 @@ stepTypes:
         run:
           templateString: ""
     name: Raw Dump
+    version: 1
+  StepType-3:
+    id: "3"
+    isDisabled: false
+    metadata:
+      defaultStorageLocation: PUBLISHED
+      error: null
+      nodeMetadataSpec: |
+        capitalized: Published Node
+        tagColor: green
+        plural: Published Nodes
+        short: PUB
+      templates:
+        create:
+          templateString: |-
+            {{ stage('Create Stage Table') }}
+            CREATE TABLE IF NOT EXISTS {{ ref_no_link(node.location.name, node.name) }} (
+              DATA OBJECT
+            )
+            COMMENT = 'Import from file node';
+        run:
+          templateString: ""
+    name: Published Node
     version: 1
   StepType-Dimension:
     id: Dimension
